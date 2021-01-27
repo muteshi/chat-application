@@ -8,12 +8,34 @@
 
     <!-- Bootstrap CSS -->
     <link
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
       rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
     />
   </head>
   <body>
-    <h1 class="text-center">Chat App</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm">
+          <form class="mt-5" id="msgForm">
+            <div class="form-group">
+              <label for="exampleInputEmail1">What are you thinking</label>
+              <input
+                type="text"
+                class="form-control"
+                name="message"
+                aria-describedby="emailHelp"
+                placeholder="Enter your message"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Send message</button>
+          </form>
+        </div>
+        <div class="col-sm"></div>
+      </div>
+    </div>
 
     <!-- socketio -->
     <script src="/socket.io/socket.io.js"></script>
