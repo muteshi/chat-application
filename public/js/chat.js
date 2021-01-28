@@ -11,17 +11,26 @@ const $messages = document.querySelector("#messages");
 const messageTemplate = document.querySelector("#msg-template").innerHTML;
 const locationTemplate = document.querySelector("#location-template").innerHTML;
 
+const oneHour = 60 * 60 * 1000;
+
+const timeStamp = (time) => {
+  return new Date() - time < oneHour
+    ? moment(time).fromNow()
+    : moment(time).format("h:mm a");
+};
+
 socket.on("message", ({ txt, createdAt }) => {
   const html = Mustache.render(messageTemplate, {
     message: txt,
-    createdAt: moment(createdAt).format("h:mm a"),
+    createdAt: timeStamp(createdAt),
   });
   $messages.insertAdjacentHTML("beforeend", html);
 });
 
-socket.on("locationMessage", (url) => {
+socket.on("locationMessage", ({ url, createdAt }) => {
   const html = Mustache.render(locationTemplate, {
     url,
+    createdAt: timeStamp(createdAt),
   });
   $messages.insertAdjacentHTML("beforeend", html);
 });

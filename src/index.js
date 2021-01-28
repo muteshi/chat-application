@@ -1,6 +1,6 @@
 const express = require("express");
 const http = require("http");
-const { generateMsg } = require("../src/utils/messages");
+const { generateMsg, generateLocationMsg } = require("../src/utils/messages");
 const chalk = require("chalk");
 const path = require("path");
 const socketio = require("socket.io");
@@ -33,7 +33,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("sendLocation", ({ lat, lng }, callback) => {
-    io.emit("locationMessage", `https://www.google.com/maps?q=${lat},${lng}`);
+    io.emit(
+      "locationMessage",
+      generateLocationMsg(`https://www.google.com/maps?q=${lat},${lng}`)
+    );
     callback();
   });
 
