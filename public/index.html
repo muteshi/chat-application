@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Chat App</title>
+    <link rel="icon" href="/img/favicon.ico" />
 
     <!-- Bootstrap CSS -->
     <link
@@ -15,11 +16,44 @@
     />
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-3 col-sm"></div>
+        <div class="col-6 col-sm">
+          <br />
+        </div>
+        <div class="col-3 col-sm"></div>
+      </div>
+    </div>
+    <div class="container-fluid">
       <div class="row">
         <div class="col-sm"></div>
         <div class="col-sm">
           <div id="messages"></div>
+          <script id="msg-template" type="text/html">
+            <div class="mt-2">
+              <div class="alert alert-primary" role="alert">
+                <small>Paul Muteshi.</small>
+                <br />
+                {{createdAt}} - {{message}}
+              </div>
+            </div>
+          </script>
+          <script id="location-template" type="text/html">
+            <div class="mt-2">
+              <div class="alert alert-secondary" role="alert">
+                <small>Paul Muteshi.</small>
+                <br />
+                {{createdAt}} -<a
+                  href="{{url}}"
+                  class="alert-link"
+                  target="_blank"
+                >
+                  My current location</a
+                >
+              </div>
+            </div>
+          </script>
 
           <form class="mt-5" id="msgForm">
             <div class="form-row">
@@ -34,34 +68,16 @@
               </div>
               <div class="col">
                 <button type="submit" class="btn btn-primary">Send</button>
+                <button
+                  id="send-location"
+                  type="button"
+                  class="btn btn-success"
+                >
+                  Location
+                </button>
               </div>
             </div>
           </form>
-
-          <br />
-          <button id="send-location" type="button" class="btn btn-success">
-            Send location
-          </button>
-          <script id="msg-template" type="text/html">
-            <div class="mt-2">
-              <div class="alert alert-primary" role="alert">
-                {{createdAt}} - {{message}}
-              </div>
-            </div>
-          </script>
-          <script id="location-template" type="text/html">
-            <div class="mt-2">
-              <div class="alert alert-secondary" role="alert">
-                {{createdAt}} -<a
-                  href="{{url}}"
-                  class="alert-link"
-                  target="_blank"
-                >
-                  My current location</a
-                >
-              </div>
-            </div>
-          </script>
         </div>
         <div class="col-sm"></div>
       </div>
