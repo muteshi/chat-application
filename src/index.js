@@ -1,6 +1,6 @@
 const express = require("express");
 const http = require("http");
-const geocode = require("../utils/geocode");
+const { generateMsg } = require("../src/utils/messages");
 const chalk = require("chalk");
 const path = require("path");
 const socketio = require("socket.io");
@@ -18,8 +18,8 @@ app.use(express.static(publicPath));
 io.on("connection", (socket) => {
   console.log(chalk.bold.green("New webSocket connection.."));
 
-  socket.emit("message", "Welcome");
-  socket.broadcast.emit("message", "A new user has joined");
+  socket.emit("message", generateMsg("Welcome"));
+  socket.broadcast.emit(generateMsg("message", "A new user has joined"));
 
   socket.on("sendMessage", (message, callback) => {
     const filter = new Filter();
@@ -28,7 +28,7 @@ io.on("connection", (socket) => {
       return callback("Profanity not allowed");
     }
 
-    io.emit("message", message);
+    io.emit("message", generateMsg(message));
     callback();
   });
 
@@ -38,7 +38,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    io.emit("message", "A user has left");
+    io.emit("message", generateMsg("A user has left"));
   });
 });
 
