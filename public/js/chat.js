@@ -11,6 +11,11 @@ const $messages = document.querySelector("#messages");
 const messageTemplate = document.querySelector("#msg-template").innerHTML;
 const locationTemplate = document.querySelector("#location-template").innerHTML;
 
+//options
+const { username, room } = Qs.parse(location.search, {
+  ignoreQueryPrefix: true,
+});
+
 const oneHour = 60 * 60 * 1000;
 
 const timeStamp = (time) => {
@@ -71,3 +76,5 @@ $sendLocationBtn.addEventListener("click", () => {
     });
   });
 });
+
+socket.emit("join", { username, room });
