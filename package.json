@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/muteshi/chat-application#readme",
   "dependencies": {
+    "bad-words": "^3.0.4",
     "express": "^4.17.1",
+    "request": "^2.88.2",
     "socket.io": "^3.1.0"
   },
   "devDependencies": {
