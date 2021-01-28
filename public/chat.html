@@ -33,22 +33,18 @@
           <script id="msg-template" type="text/html">
             <div class="mt-2">
               <div class="alert alert-primary" role="alert">
-                <small>Paul Muteshi.</small>
+                <small>{{createdAt}} - {{username}} </small>
                 <br />
-                {{createdAt}} - {{message}}
+                {{message}}
               </div>
             </div>
           </script>
           <script id="location-template" type="text/html">
             <div class="mt-2">
               <div class="alert alert-secondary" role="alert">
-                <small>Paul Muteshi.</small>
+                <small>{{createdAt}} - {{username}} send location</small>
                 <br />
-                {{createdAt}} -<a
-                  href="{{url}}"
-                  class="alert-link"
-                  target="_blank"
-                >
+                <a href="{{url}}" class="alert-link" target="_blank">
                   My current location</a
                 >
               </div>
@@ -62,6 +58,7 @@
                   type="text"
                   class="form-control"
                   name="message"
+                  required
                   aria-describedby="emailHelp"
                   placeholder="Enter your message"
                 />

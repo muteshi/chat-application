@@ -24,18 +24,20 @@ const timeStamp = (time) => {
     : moment(time).format("h:mm a");
 };
 
-socket.on("message", ({ txt, createdAt }) => {
+socket.on("message", ({ username, txt, createdAt }) => {
   const html = Mustache.render(messageTemplate, {
     message: txt,
-    createdAt: timeStamp(createdAt),
+    username,
+    createdAt: moment(createdAt).format("h:mm a"),
   });
   $messages.insertAdjacentHTML("beforeend", html);
 });
 
-socket.on("locationMessage", ({ url, createdAt }) => {
+socket.on("locationMessage", ({ username, url, createdAt }) => {
   const html = Mustache.render(locationTemplate, {
     url,
-    createdAt: timeStamp(createdAt),
+    username,
+    createdAt: moment(createdAt).format("h:mm a"),
   });
   $messages.insertAdjacentHTML("beforeend", html);
 });
