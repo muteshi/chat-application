@@ -1,6 +1,12 @@
 const express = require("express");
 const http = require("http");
 const { generateMsg, generateLocationMsg } = require("../src/utils/messages");
+const {
+  addUser,
+  removeUser,
+  getUser,
+  getUsersInRoom,
+} = require("../src/utils/users");
 const chalk = require("chalk");
 const path = require("path");
 const socketio = require("socket.io");
@@ -18,12 +24,20 @@ app.use(express.static(publicPath));
 io.on("connection", (socket) => {
   console.log(chalk.bold.green("New webSocket connection.."));
 
-  socket.on("join", ({ username, room }) => {
-    socket.join(room);
+  socket.on("join", (options, callback) => {
+    const { error, user } = addUser({ id: socket.id, ...options });
+
+    if (error) {
+      return callback(error);
+    }
+
+    socket.join(user.room);
     socket.emit("message", generateMsg("Welcome"));
     socket.broadcast
-      .to(room)
-      .emit("message", generateMsg(`${username} has joined`));
+      .to(user.room)
+      .emit("message", generateMsg(`${user.username} has joined`));
+
+    callback();
   });
 
   socket.on("sendMessage", (message, callback) => {
@@ -46,7 +60,14 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    io.emit("message", generateMsg("A user has left"));
+    const user = removeUser(socket.id);
+
+    if (user) {
+      io.to(user.room).emit(
+        "message",
+        generateMsg(`${user.username} has left`)
+      );
+    }
   });
 });
 
