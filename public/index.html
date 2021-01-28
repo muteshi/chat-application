@@ -43,8 +43,17 @@
             Send location
           </button>
           <script id="msg-template" type="text/html">
-            <div class="mt-5">
+            <div class="mt-2">
               <div class="alert alert-primary" role="alert">{{message}}</div>
+            </div>
+          </script>
+          <script id="location-template" type="text/html">
+            <div class="mt-2">
+              <div class="alert alert-secondary" role="alert">
+                <a href="{{url}}" class="alert-link" target="_blank"
+                  >My current location</a
+                >
+              </div>
             </div>
           </script>
         </div>
