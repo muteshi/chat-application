@@ -51,6 +51,16 @@
             </div>
           </script>
 
+          <script id="sidebar-template" type="text/html">
+            <h3>{{room}}</h3>
+            <h4>Online users</h4>
+            <ul class="list-group">
+              {{#users}}
+              <li class="list-group-item">{{username}}</li>
+              {{/users}}
+            </ul>
+          </script>
+
           <form class="mt-5" id="msgForm">
             <div class="form-row">
               <div class="col">
@@ -76,7 +86,7 @@
             </div>
           </form>
         </div>
-        <div class="col-sm"></div>
+        <div class="col-sm" id="sidebar"></div>
       </div>
     </div>
 
